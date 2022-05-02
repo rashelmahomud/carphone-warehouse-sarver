@@ -27,16 +27,16 @@ async function run() {
             res.send(services);
         });
 
-        app.get('/service/:id', async(req,res) => {
+        app.get('/service/:id', async (req, res) => {
             const id = req.params.id;
-            const query = {_id: ObjectId(id)};
+            const query = { _id: ObjectId(id) };
             const service = await serviceCollection.findOne(query);
             res.send(service);
         });
 
 
-        //POST
-        app.post('/service', async(req,res) =>{
+        //POST ADD IN MY ITEMS.
+        app.post('/service', async (req, res) => {
             const newService = req.body;
             const result = await serviceCollection.insertOne(newService);
             res.send(result);
@@ -51,13 +51,13 @@ async function run() {
         //     res.send(items)
         // })
 
-          // update user
-          app.put('/service/:id', async(req, res)=>{
+        // update user quentity and setup
+        app.put('/service/:id', async (req, res) => {
             const id = req.params.id;
             const updateUser = req.body.quantity;
             console.log(req.body.quantity)
             const filter = { _id: ObjectId(id) };
-            const options = {upsert: true};
+            const options = { upsert: true };
             const updatedDoc = {
                 $set: { quantity: updateUser }
             }
@@ -67,10 +67,10 @@ async function run() {
 
 
 
-          // delete a user
-          app.delete('/service/:id', async(req, res)=>{
+        // delete a user
+        app.delete('/service/:id', async (req, res) => {
             const id = req.params.id;
-            const query = {_id: ObjectId(id)};
+            const query = { _id: ObjectId(id) };
             const result = await ItemCollection.deleteOne(query);
             res.send(result)
         });
@@ -78,7 +78,7 @@ async function run() {
 
     }
 
-    
+
     finally {
 
     }
