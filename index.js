@@ -34,7 +34,6 @@ async function run() {
             res.send(service);
         });
 
-
         //POST ADD IN MY ITEMS.
         app.post('/service', async (req, res) => {
             const newService = req.body;
@@ -42,24 +41,22 @@ async function run() {
             res.send(result);
         });
 
-
-
-        // app.get('/service/:id', async(req, res)=>{
+        // app.get('/service', async(req, res)=>{
         //     const id = req.params.id;
         //     const query = {_id: ObjectId(id)};
-        //     const items = await ItemCollection.findOne(query);
+        //     const items = await serviceCollection.findOne(query);
         //     res.send(items)
         // })
 
         // update user quentity and setup
         app.put('/service/:id', async (req, res) => {
             const id = req.params.id;
-            const updateUser = req.body.quantity;
-            console.log(req.body.quantity)
+            const updateUser = req.body.Quantity;
+            console.log(req.body.Quantity)
             const filter = { _id: ObjectId(id) };
             const options = { upsert: true };
             const updatedDoc = {
-                $set: { quantity: updateUser }
+                $set: { Quantity: updateUser }
             }
             const result = await serviceCollection.updateOne(filter, updatedDoc, options);
             res.send(result)
