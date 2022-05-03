@@ -19,6 +19,18 @@ async function run() {
     try {
         await client.connect();
         const serviceCollection = client.db('Carphone-warehouse').collection('service');
+        const reviewsCollection = client.db('Carphone-warehouse').collection('reviews');
+
+
+        //reviews loded all clients data
+        app.get('/reviews', async(req,res) => {
+
+            const query = {};
+            const cursor = reviewsCollection.find(query);
+            const review = await cursor.toArray();
+            res.send(review);
+
+        });
 
         app.get('/service', async (req, res) => {
             const query = {};
